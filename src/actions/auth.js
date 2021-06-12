@@ -1,22 +1,13 @@
-import firebase from 'firebase'
+ import firebase from 'firebase'
+ import {useState} from 'react'
+ import {dispatch} from 'react-redux' 
 
-export const sigup =(user) =>{
+const sigup = (data) => {
+    return(dispatch) => {
+      console.log(data);
+    }  
+}
 
-    return async (dispatch)=>{
-
-        firebase.auth().createUserWithEmailAndPassword(user.email, user.password)
-        .then((userCredential) => {
-          // Signed in 
-          var user = userCredential.user;
-           
-        })
-        .catch((error) => {
-          var errorCode = error.code;
-          var errorMessage = error.message;
-          console.log("errr",error);
-          // ..
-        });
-      
-    }
-    
+export {
+  sigup 
 }

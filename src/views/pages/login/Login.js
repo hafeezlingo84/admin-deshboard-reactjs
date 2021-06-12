@@ -1,4 +1,6 @@
 import React,{useState} from 'react'
+import { useDispatch } from 'react-redux'
+import { sigup } from "../../../actions/auth";
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -17,11 +19,12 @@ import {
 import CIcon from '@coreui/icons-react'
 
 
-const Login = (props) => {
-  
-  const [userEmail,setUserEmail]=useState('');
-  const [userPassowrd,setUserPassword]=useState('');
+const Login = () => {
 
+  const [email,setEmail] =useState('');
+  const [passowrd,setPassword]=useState('');
+  const dispatch = useDispatch();
+ 
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -39,7 +42,7 @@ const Login = (props) => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" value={userEmail} onChange={(e) => setUserEmail(e.target.value)} />
+                  <CInput type="text" placeholder="Username" autoComplete="username"  name='userName' onChange={(e)=> setEmail(e.target.value)} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -47,11 +50,12 @@ const Login = (props) => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" value={userPassowrd} onChange={(e) => setUserPassword(e.target.value)} />
+                      <CInput type="password" placeholder="Password" autoComplete="current-password"  name='userPassord' onChange={(e)=> setPassword(e.target.value)}/>
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton color="primary" className="px-4">Login</CButton>
+                   
+                        <CInput type='button' onClick={() => dispatch(sigup(`${email}`,`${passowrd}`))} color="primary" className="px-4" value='login'/>
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
@@ -79,5 +83,6 @@ const Login = (props) => {
     </div>
   )
 }
+
 
 export default Login
